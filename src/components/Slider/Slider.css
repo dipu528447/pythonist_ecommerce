@@ -1,0 +1,10 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.slider{
+    background-image: url('../../assests/Media/Copy-of-Unnamed-Design-1.png');
+    background-position: 12% 18%;
+    background-repeat: no-repeat;
+}

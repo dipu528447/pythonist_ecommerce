@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { createContext, useState } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import Main from './components/Main/Main';
+import { router } from './Router/Route';
+
+
+export const UserContext =createContext();
+export const LoadingContext=createContext();
+export const CartContext=createContext();
 
 function App() {
+  const [user,setUser]=useState("")
+  const [cart,setCart]=useState([]);
+  const [loading,setLoading]=useState(true);  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <UserContext.Provider value={[user,setUser]}>      
+        <LoadingContext.Provider value={[loading,setLoading]}>
+          <CartContext.Provider value={[cart,setCart]}>
+            <div className="App">
+              <RouterProvider router={router}>
+                <Main></Main>                
+              </RouterProvider>
+            </div>
+          </CartContext.Provider>
+        </LoadingContext.Provider>
+    </UserContext.Provider>
+    
   );
 }
-
 export default App;
