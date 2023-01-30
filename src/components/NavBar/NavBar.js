@@ -47,8 +47,8 @@ const NavBar = () => {
                         <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
                         </a>
                         <ul className="p-2">
-                        <li><a>Jackets</a></li>
-                        <li><a>Books</a></li>
+                            <li><a>Jackets</a></li>
+                            <li><a>Books</a></li>
                         </ul>
                     </li>
                     <li><a>Track Order</a></li>
@@ -58,7 +58,7 @@ const NavBar = () => {
                 <div className="navbar-end">
                     <label className='mx-2 text-2xl'><BsSearch/></label>
                     <label className='mx-2 text-2xl'><BsHeart/></label>
-                    <label className='mx-2 text-2xl'><CiUser/></label>
+                    <Link to='/dashboard'><label className='mx-2 text-2xl'><CiUser/></label></Link>
                     <div className="indicator">
                         <span className="indicator-item badge badge-secondary">{cart.length}</span> 
                         <label htmlFor="my-drawer-4" className='mx-2 text-2xl drawer-button'><BsCart/></label>

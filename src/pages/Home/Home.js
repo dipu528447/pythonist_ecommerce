@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../App';
+import Footer from '../../components/Footer/Footer';
 import ProductCategory from '../../components/ProductCategory/ProductCategory';
 import Products from '../../components/Products/Products';
 import Service from '../../components/Service/Service';
@@ -24,6 +25,8 @@ const Home = () => {
                     <Products></Products>
                     <br></br>
                     <Testimonial></Testimonial>
+                    <br></br>
+                    <Footer></Footer>
                 </div> 
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-4" className="drawer-overlay"></label>

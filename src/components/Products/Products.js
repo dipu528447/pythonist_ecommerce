@@ -7,7 +7,7 @@ const Products = () => {
     const [productItems,setProductItems]=useState([]);
     const [user,setUser]=useContext(UserContext);
     useEffect(() => {
-        fetch(`http://localhost:5000/products`)
+        fetch(`https://serverside-gamma.vercel.app/products`)
         .then(res=>res.json())
         .then(data=>{
             // console.log(data)
@@ -34,7 +34,7 @@ const Products = () => {
                 quantity:"1"
             }
             console.log(product)
-            fetch('http://localhost:5000/addOrder', {
+            fetch('https://serverside-gamma.vercel.app/addOrder', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json', 

@@ -1,37 +1,39 @@
+import { getAuth, signOut } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext, UserContext } from '../../App';
-import { Link } from 'react-router-dom';
+import { app } from '../../firebase';
 
-const ViewCart = () => {
+const Dashboard = () => {
+    const [user,setUser]=useContext(UserContext)
+    const auth=getAuth(app)
+    const navigate=useNavigate();
     const [cart,setCart]=useContext(CartContext)
-    const [user,setUser]=useContext(UserContext);
+    
     const [total,setTotal]=useState(0);
     useEffect(()=>{
         var sum=0
         for(var i=0;i<cart.length;i++){
             sum+=parseInt(cart[i].productPrice)*parseInt(cart[i].quantity)
+            
         }
         setTotal(sum)
     },[cart])
-    function removeToCart(item){
-        console.log(item.productId)
-        fetch(`https://serverside-gamma.vercel.app/removeToCart/${item.productId}`, {
-            method: 'DELETE', 
-            headers:{
-                'content-type': 'application/json', 
-            },
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(cart)
-            setCart(cart.filter(prod=>prod.productId!==item.productId))
-            alert('Deleted Sucessfully')
-        })
-
+    const logout=()=>{
+        signOut(auth).then(()=>{
+            setUser({});
+            alert('log out successfully');
+            navigate('/',{replace:true})
+            navigate(0)
+            
+        }).catch((err)=>{
+            console.error(err)
+        });
     }
     
     return (
-        <div className='w-4/5 mx-auto'>
+        <div>
+            <div className='w-4/5 mx-auto'>
             <div className='flex mt-10 '>
                 <div className="overflow-x-auto w-2/3">
                     <table className="table w-full">                        
@@ -71,9 +73,7 @@ const ViewCart = () => {
                                             <td>
                                                 <div className="font-bold">{item.productPrice}</div>
                                             </td>
-                                            <td>
-                                                <button className='btn btn-red-500' onClick={()=>removeToCart(item)}>Delete</button>
-                                            </td>
+                                            
                                         </tr>
                                         
                                     )
@@ -93,13 +93,16 @@ const ViewCart = () => {
                             <p className='text-blue-500'>total : {total}</p>
                         </div>
                     </div>
-                    <Link to='/checkOut'><button className='btn btn-primary mt-10'>Checkout</button></Link>
+                          
                 </div>
 
+                        
+                </div>
+                    <button className='btn btn-primary' onClick={logout}>logout</button>
+                </div>
             </div>
             
-        </div>
     );
 };
 
-export default ViewCart;
+export default Dashboard;

@@ -13,7 +13,7 @@ export const CartContext=createContext();
 function App() {
   const [user,setUser]=useState("")
   const [cart,setCart]=useState([]);
-  const [loading,setLoading]=useState(true);  
+  const [loading,setLoading]=useState(false);  
   return (
     
     <UserContext.Provider value={[user,setUser]}>      
